@@ -30,6 +30,8 @@ Assuming you have virtualenv created in your system :
 
 4. type the following command in the terminal to run the app: "python app.py"
 
+5. type following url in browser : http://localhost:50000/
+
 ```
 
 ## Usage
