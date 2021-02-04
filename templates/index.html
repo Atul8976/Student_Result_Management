@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Index </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+        <!-- Fonts   -->
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="jumbotron">
+        <nav class="navbar navbar-default custom-navbar">
+        <ul class='nav navbar-nav techfont navbar-left'>
+          <li><a class="navbar-brand bigbrand">Student Result Management System</a></li>
+            <li><a href="/index">home</a></li>
+            <li><a href="/report">Report</a></li>
+            {% if session['username'] %}
+                <li><a href="/logout">Logout</a></li>
+            {%else%}
+                <li><a href="/register">Registration</a></li>
+                <li><a href="/login">Login</a></li>
+            {%endif%}
+        </ul>
+        </nav>
+        </div>
+        <div class="container">
+              {% set count = 0 %}
+             {% if ((session['username']) and (session['length'])) %}
+                {% set count = session['standard'] %}
+                {%set SID = session['id']%}
+                <h1 class="posttitle loader">
+                     Hi {{session.username}}!! Welcome to the Student Result Management...
+                </h1></br>
+                <h2 class="techfont">
+                     Please Click on below button to see result:
+                </h2></br>
+                <a href="{{ url_for('result') }}" class="btn btn-primary">Report</a>
+            {% elif session['username'] %}
+                {% set count = session['standard'] %}
+                {%set SID = session['id']%}
+                <h1 class="posttitle loader">
+                     Hi {{session.username}}!! Welcome to the Student Result Management...
+                </h1></br>
+                <h2 class="techfont">
+                    Please fill below form:
+                </h2></br>
+                <form class="form-inline" id = "myForm" action="/save" method="post">
+                {% for i in range(1,count|int ) %}
+                     <div class = 'form-group'>
+                      <label for="std_{{i}}"}>standard:</label>
+                      <input type="text" class="form-control" required placeholder="{{i}} std" id="std_{{i}}">
+                      <label for="grd_{{i}}">grade:</label>
+                      <input type="text" class="form-control" required placeholder="A" id="grd_{{i}}">
+                      <label for="remark_{{i}}">remark:</label>
+                      <input type="text" class="form-control" required placeholder="pass" id="remark_{{i}}">
+                      <label for="per_{{i}}">percentage:</label>
+                      <input type="text" class="form-control" required placeholder="60%" id="per_{{i}}" >
+                    </div>
+                    </br></br>
+                {%endfor%}
+                    </br></br>
+                    <button type="submit" id=submit class="btn btn-primary">Submit</button>
+
+                <input type="hidden" id="hid" name="hid">
+                <input type="hidden" id="sid" name="sid" value={{SID}}>
+                </form>
+            {%else%}
+                <h1 class="posttitle loader">
+                    Hi {{session.username}}!! Welcome to the Student Result Management...
+                </h1></br>
+                <h2 class="techfont">
+                    Please click on login button to see the result...
+                </h2></br>
+                <a href="{{ url_for('login') }}" class="btn btn-primary">LogIn</a>
+            {% endif %}
+          </div>
+    </body>
+    <script>
+       $('#myForm').submit(function() {
+        // get all the inputs into an array.
+        var $inputs = $('#myForm :input');
+
+        // not sure if you wanted this, but I thought I'd add it.
+        // get an associative array of just the values.
+        var values = {};
+        $inputs.each(function() {
+            values[this.id] = $(this).val();
+        });
+        value = JSON.stringify(values);
+        $('#hid').val(value);
+<!--        $.ajax({-->
+<!--          type: "POST",-->
+<!--          url: "{{url_for('save')}}",-->
+<!--          traditional: "true",-->
+<!--          data : {'my_dict':value},-->
+<!--          dataType: "json"-->
+<!--          });-->
+
+    });
+
+</script>
+</html>

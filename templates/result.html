@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Student Result</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+        <!-- Fonts   -->
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+    <div class="jumbotron">
+        <nav class="navbar navbar-default custom-navbar">
+        <ul class='nav navbar-nav techfont navbar-left'>
+            <li><a class="navbar-brand bigbrand">Student Result Management System</a></li>
+            <li><a href="/index">home</a></li>
+            <li><a href="/report">Report</a></li>
+            {% if session['username'] %}
+                <li><a href="/logout">Logout</a></li>
+            {%else%}
+                <li><a href="/register">Registration</a></li>
+                <li><a href="/login">Login</a></li>
+            {%endif%}
+        </ul>
+        </nav>
+    </div>
+    <div class="container">
+         {% if session['username'] %}
+            <h1 class="posttitle loader">Hi {{session.username}}!! Welcome to the Student Result Management...</h1>
+            <h2 class="techfont">below are your reports:</h2>
+            {% set result = session.result %}
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Standard</th>
+                        <th>Grade</th>
+                        <th>Remark</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for r in result%}
+                        <tr>
+                            <td>{{r[0]}}</td>
+                            <td>{{r[1]}}</td>
+                            <td>{{r[2]}}</td>
+                            <td>{{r[3]}}</td>
+
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+         {%else%}
+            <h1 class="posttitle loader">Hi {{session.username}}!! Welcome to the Student Result Management...</h1>
+            <br>
+            <h2 class="techfont">Please click on login button for report:</h2>
+            <br>
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+         {%endif%}
+    </div>
+</body>
+</html>

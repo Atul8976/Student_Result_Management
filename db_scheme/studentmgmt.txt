@@ -1,0 +1,136 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 04, 2021 at 11:23 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `studentmgmt`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+-- Creation: Feb 03, 2021 at 09:45 AM
+-- Last update: Feb 04, 2021 at 10:18 AM
+--
+
+CREATE TABLE `accounts` (
+  `ID` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `roll_number` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `standard` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONSHIPS FOR TABLE `accounts`:
+--
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`ID`, `username`, `roll_number`, `email`, `password`, `standard`) VALUES
+(12, 'atulin', 11, 'passadam@grmial.com', 'pbkdf2:sha256:150000$S3K4D4mJ$7158826347e41abab6f2', 2),
+(13, 'LE0001', 15, 'passdam@grmial.com', 'pbkdf2:sha256:150000$g3ewRThL$e00abcef12479cf41cb9', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `result_data`
+--
+-- Creation: Feb 03, 2021 at 04:40 PM
+-- Last update: Feb 04, 2021 at 10:19 AM
+--
+
+CREATE TABLE `result_data` (
+  `ID` int(11) NOT NULL,
+  `SID` int(11) NOT NULL,
+  `standard` varchar(30) NOT NULL,
+  `grade` varchar(30) NOT NULL,
+  `remark` varchar(30) NOT NULL,
+  `percentage` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONSHIPS FOR TABLE `result_data`:
+--   `SID`
+--       `accounts` -> `ID`
+--
+
+--
+-- Dumping data for table `result_data`
+--
+
+INSERT INTO `result_data` (`ID`, `SID`, `standard`, `grade`, `remark`, `percentage`) VALUES
+(69, 12, '1st', 'A', 'pass', '75%'),
+(70, 13, '1st', 'A', 'pass', '85%'),
+(71, 13, '2nd', 'C', 'pass', '50%'),
+(72, 13, '3rd', 'pass', 'pass', '60%'),
+(73, 13, '4th', 'A', 'pass', '90%');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `result_data`
+--
+ALTER TABLE `result_data`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SID` (`SID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `result_data`
+--
+ALTER TABLE `result_data`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `result_data`
+--
+ALTER TABLE `result_data`
+  ADD CONSTRAINT `result_data_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `accounts` (`ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
