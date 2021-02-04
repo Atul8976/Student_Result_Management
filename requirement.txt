@@ -1,0 +1,54 @@
+amqp==2.6.1
+argon2-cffi==20.1.0
+asgiref @ file:///tmp/build/80754af9/asgiref_1605055780383/work
+bcrypt==3.2.0
+billiard==3.6.3.0
+celery==4.4.7
+certifi==2020.6.20
+cffi==1.14.4
+click==7.1.2
+click-didyoumean==0.0.3
+click-plugins==1.1.1
+click-repl==0.1.6
+cryptography==3.3.1
+Django @ file:///tmp/build/80754af9/django_1606860386887/work
+django-bootstrap3==14.2.0
+django-debug-toolbar==3.2
+djangorestframework==3.12.2
+Faker==5.0.2
+Flask==1.1.2
+Flask-MySQL==1.5.2
+Flask-MySQLdb==0.2.0
+flower==0.9.7
+gevent==20.12.1
+greenlet==0.4.17
+humanize==3.2.0
+itsdangerous==1.1.0
+Jinja2==2.11.2
+kombu==4.6.11
+MarkupSafe==1.1.1
+misaka==2.1.1
+mysqlclient==2.0.3
+Pillow==8.0.1
+prometheus-client==0.8.0
+prompt-toolkit==3.0.9
+psycopg2 @ file:///C:/ci/psycopg2_1594305172475/work
+pycparser==2.20
+Pygments==2.7.4
+PyJWT==2.0.0
+PyMySQL==0.10.1
+python-dateutil==2.8.1
+Python-dev==2.0.0.dev0
+pytz @ file:///tmp/build/80754af9/pytz_1606604771399/work
+rabbitmq==0.2.0
+redis==3.5.3
+six==1.15.0
+sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
+text-unidecode==1.3
+tornado==6.1
+vine==1.3.0
+wcwidth==0.2.5
+Werkzeug==1.0.1
+wincertstore==0.2
+zope.event==4.5.0
+zope.interface==5.2.0
